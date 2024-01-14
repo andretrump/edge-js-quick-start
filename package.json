@@ -19,6 +19,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "edge-fs": "^0.2.0",
     "edge-js": "^20.10.2"
   }
 }

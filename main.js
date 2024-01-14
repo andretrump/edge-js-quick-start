@@ -91,3 +91,22 @@ getPerson('', function(error, result) {
 });
 
 
+const dataPath = './data/msft.csv';
+const printTypes = edge.func({
+    language: 'fs',
+    source: `
+open FSharp.Data
+
+type Stocks = CsvProvider<"${dataPath}">
+let sampleRow = Stocks.GetSample()
+let rowsProperty = sampleRow.GetType().GetProperties()[0]
+printfn "%s" (rowsProperty.PropertyType.FullName)
+`,
+    references: [
+        "dlls/FSharp.Data.dll"
+    ]
+});
+printTypes(null, function (error, result) {
+    if (error) throw error;
+    console.log(result);
+});
